@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
 import { CreateCarDto } from './dto/create-car.dto';
+import { editCarDto } from './dto/edit-car.dto';
 
 @Injectable()
 export class CarsService {
@@ -37,7 +38,17 @@ export class CarsService {
     }
 
     createCar(car: CreateCarDto){
-        return car
+        return this.cars.push({
+            id: uuid(),
+            ...car
+        })
+    }
+    editCar(id: string, car: editCarDto){
+        
+        return {
+            id,
+            ...car
+        }
     }
 
 }
